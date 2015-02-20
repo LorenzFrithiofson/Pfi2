@@ -3,11 +3,15 @@ public class Dog extends Mammal{
 
 	private boolean stupid;
 	
-	public Dog(String friendlyName, String latinName, int gestationTime, boolean stupid){
-		super(friendlyName, latinName, gestationTime);
+	public Dog(String latinName, int gestationTime, boolean stupid){
+		super(latinName, gestationTime);
 		this.stupid = stupid;
 	}
-	
+	public Dog(String friendlyName, String latinName, int gestationTime, boolean stupid){
+		super(latinName, gestationTime);
+		this.stupid = stupid;
+		setFriendlyName(friendlyName);
+	}
 	public boolean isStupid(){
 		return stupid;
 	}

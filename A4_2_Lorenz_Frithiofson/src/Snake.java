@@ -3,8 +3,8 @@ public class Snake extends Animal {
 	
 	private boolean poisounus;
 	
-	public Snake(String friendlyName, String latinName, boolean poisounus) {
-		super(friendlyName, latinName);
+	public Snake(String latinName, boolean poisounus) {
+		super(latinName);
 		this.poisounus = poisounus;
 	}
 	public boolean isPoisounus(){

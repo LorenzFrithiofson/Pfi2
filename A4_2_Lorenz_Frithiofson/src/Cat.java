@@ -3,8 +3,8 @@ public class Cat extends Mammal{
 
 	private int numberOfLifes;
 	
-	public Cat(String friendlyName, String latinName, int gesetationTime, int numberOfLifes){
-		super(friendlyName, latinName, gesetationTime);
+	public Cat(String latinName, int gesetationTime, int numberOfLifes){
+		super(latinName, gesetationTime);
 		this.numberOfLifes = numberOfLifes;
 		
 	}
@@ -22,7 +22,7 @@ public class Cat extends Mammal{
 		
 		String info = "";
 		
-		info = "Katten " + this.getFriendlyName() + "/" + this.getLatinName() + " är dräktig i " + this.getGestationTime() + " månader och har " + this.getNumberOfLifes() + " liv." + "\n";
+		info = "Katten " + getFriendlyName() + "/" + this.getLatinName() + " är dräktig i " + this.getGestationTime() + " månader och har " + this.getNumberOfLifes() + " liv." + "\n";
 		
 		return info;
 	}

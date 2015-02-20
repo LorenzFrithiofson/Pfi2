@@ -3,9 +3,9 @@ public abstract class Animal {
 	private String latinName;
 	private String friendlyName;
 	
-	public Animal(String friendlyName, String latinName){
+	public Animal(String latinName){
 		this.latinName = latinName;
-		this.friendlyName = friendlyName;
+		//this.friendlyName = friendlyName;
 		
 	}
 	

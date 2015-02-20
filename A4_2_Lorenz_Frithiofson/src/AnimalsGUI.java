@@ -45,12 +45,24 @@ public class AnimalsGUI extends JFrame {
 		textArea.setBounds(10, 11, 414, 239);
 		contentPane.add(textArea);
 		
+		Cat cat1 = new Cat("Mjaos-FörMyckus",3,5);
+		cat1.setFriendlyName("KattenMjao");
+		
+		Cat cat2 = new Cat("Nextus-Kungus",3,2);
+		cat2.setFriendlyName("Simba");
+		
+		Snake snake1 = new Snake("Väsus-Myckus",false);
+		snake1.setFriendlyName("SirVäs");
+		
+		Snake snake2 = new Snake("Förklädd-Maskus",true);
+		snake2.setFriendlyName("Mask");
+		
 		djur.add(new Dog("Lovis", "Busus-Hungrus", 5, true));
 		djur.add(new Dog("Lyra", "Sötus-extremus", 5, false));
-		djur.add(new Cat("Katten Mjao", "Mjaous-Förmyckus", 100, 9));
-		djur.add(new Cat("Simba", "Nextus-Kungus", 0, 3));
-		djur.add(new Snake("SirVäs", "Väsus-Iritationus", true));
-		djur.add(new Snake("Mask", "Mask-I-förklädus", false));
+		djur.add(cat1);
+		djur.add(cat2);
+		djur.add(snake1);
+		djur.add(snake2);
 		
 			for(Animal i: djur){
 				textArea.append(i.getInfo() + "\n");
