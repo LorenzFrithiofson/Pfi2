@@ -100,8 +100,9 @@ public class HumanAndDogGUI extends JFrame {
 		JButton btnPrintInfo = new JButton("Print info");
 		btnPrintInfo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtInfo.setText(human.getInfo());
-				
+				if(human != null){
+					txtInfo.setText(human.getInfo());
+				} 
 			}
 		});
 		btnPrintInfo.setBounds(127, 109, 89, 23);
