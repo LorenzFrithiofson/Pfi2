@@ -15,12 +15,13 @@ public class UpdateThread extends Thread{
 		while(true){
 	
 		try {
-			Thread.sleep(3000);
+			gui.updateTimes();
+			Thread.sleep(30000);
 		} catch (InterruptedException e) {
 			
 			e.printStackTrace();
 		}
-		gui.updateTimes();
+		
 		}
 		
 	}
