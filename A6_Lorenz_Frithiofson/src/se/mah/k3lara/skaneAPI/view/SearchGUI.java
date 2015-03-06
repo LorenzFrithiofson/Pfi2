@@ -1,3 +1,4 @@
+package se.mah.k3lara.skaneAPI.view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -11,25 +12,34 @@ import javax.swing.JTextArea;
 import se.mah.k3lara.skaneAPI.control.Constants;
 import se.mah.k3lara.skaneAPI.model.Journey;
 import se.mah.k3lara.skaneAPI.model.Journeys;
+import se.mah.k3lara.skaneAPI.model.JourneysThread;
 import se.mah.k3lara.skaneAPI.model.Station;
+import se.mah.k3lara.skaneAPI.model.StationsThread;
 import se.mah.k3lara.skaneAPI.xmlparser.Parser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 
 
 public class SearchGUI extends JFrame {
 
-	private JPanel Resultat;
-	private JTextField sökSträng;
-	private JTextField från;
-	private JTextField till;
-	ArrayList<Station> searchStations = new ArrayList<Station>(); 
+	public JPanel Resultat;
+	public JTextArea textArea;
+	public JTextArea searchresult;
+	public JTextField sökSträng;
+	public JTextField från;
+	public JTextField till;
+	public ArrayList<Station> searchStations;
 	
+	SearchGUI g = this;
+	public Parser p = new Parser();
+	Thread t1 = new JourneysThread(p, this);
+	Thread t2 = new StationsThread(p, this);
 	/**
 	 * Launch the application.
 	 */
@@ -65,7 +75,7 @@ public class SearchGUI extends JFrame {
 		scrollPane.setViewportView(panel);
 		panel.setLayout(null);
 		
-		final JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setBounds(10, 151, 230, 242);
 		panel.add(textArea);
 		
@@ -74,16 +84,14 @@ public class SearchGUI extends JFrame {
 		panel.add(sökSträng);
 		sökSträng.setColumns(10);
 		
-		JButton sök = new JButton("S\u00F6k");
-		sök.setBounds(76, 87, 86, 23);
-		panel.add(sök);
-		sök.addActionListener(new ActionListener() {
+		JButton search = new JButton("S\u00F6k");
+		search.setBounds(76, 87, 86, 23);
+		panel.add(search);
+		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
-				searchStations.addAll(Parser.getStationsFromURL(sökSträng.getText()));
-				for (Station s: searchStations){
-					
-					textArea.append(s.getStationName() +" number:" +s.getStationNbr() + "\n");
-				}
+			textArea.setText("Searching...");
+			StationsThread t2 = new StationsThread(p,g);
+			t2.start();
 			}
 		});
 		
@@ -106,28 +114,21 @@ public class SearchGUI extends JFrame {
 		panel_1.add(till);
 		till.setColumns(10);
 		
-		final JTextArea sökresultatet = new JTextArea();
-		sökresultatet.setBounds(0, 0, 232, 206);
-		panel_1.add(sökresultatet);
+		searchresult = new JTextArea();
+		searchresult.setBounds(0, 0, 232, 206);
+		panel_1.add(searchresult);
 		
 		
 	
-		JButton sökResa = new JButton("S\u00F6k Resa");
-		sökResa.addActionListener(new ActionListener() {
+		JButton searchTravel = new JButton("S\u00F6k Resa");
+		searchTravel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String searchURL = Constants.getURL(från.getText() + "",till.getText(),1);
-				Journeys journeys = Parser.getJourneys(searchURL);
-				for (Journey journey : journeys.getJourneys()) {
-					sökresultatet.setText(journey.getStartStation()+" - ");
-					sökresultatet.append(journey.getEndStation()+ "");
-					String time = journey.getDepDateTime().get(Calendar.HOUR_OF_DAY)+":"+journey.getDepDateTime().get(Calendar.MINUTE);
-					sökresultatet.append("\nDeparts " + time +" that is in "+journey.getTimeToDeparture()+ " minutes. \nAnd it is "+journey.getDepTimeDeviation()+" min late");
-				} 
-				
+				JourneysThread t1 = new JourneysThread(p,g);
+				t1.start();
 			}
 		});
-		sökResa.setBounds(71, 280, 89, 23);
-		panel_1.add(sökResa);
+		searchTravel.setBounds(71, 280, 89, 23);
+		panel_1.add(searchTravel);
 		
 		JLabel lblNewLabel = new JLabel("Fr\u00E5n");
 		lblNewLabel.setBounds(31, 217, 46, 14);

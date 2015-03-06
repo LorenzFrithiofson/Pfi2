@@ -7,18 +7,18 @@ import java.util.Calendar;
  *
  */
 public class Journey {
-	public Calendar depDateTime;
-	public Calendar arrDateTime;
-	public String noOfChanges;
-	public String lineOnFirstJourney;
-	public String travelMinutes;
-	public String timeToDeparture;
-	public String noOfZones;
-	public String lineTypeName;
-	public String depTimeDeviation;
-	public String arrTimeDeviation;
-	public Station startStation;
-	public Station endStation;
+	private Calendar depDateTime;
+	private Calendar arrDateTime;
+	private String noOfChanges;
+	private String lineOnFirstJourney;
+	private String travelMinutes;
+	private String timeToDeparture;
+	private String noOfZones;
+	private String lineTypeName;
+	private String depTimeDeviation;
+	private String arrTimeDeviation;
+	private Station startStation;
+	private Station endStation;
 	
 	public Journey(Station startStation, Station endStation) {
 		this.startStation = startStation;
